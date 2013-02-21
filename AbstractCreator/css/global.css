@@ -93,8 +93,21 @@ i.colorbox {
 	text-align: left;
 }
 
-#editor .editline a {
+#editor a {
 	cursor: pointer;
+}
+
+#editor .editline > a {
+	text-decoration: underline;
+}
+
+#editor .popover-content {
+	padding: 6px 10px;
+}
+
+#editor .popover-content textarea {
+	padding: 0px;
+	width: 100%;
 }
 /* }}} */
 

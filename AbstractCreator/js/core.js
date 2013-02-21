@@ -43,25 +43,29 @@ $.extend({
 				$(html)
 					.children('.section').each(function() {
 						$('#sub-sidebar ul').append('<li><a href="#">' + $(this).data('title') + '</a></li>');
-						var line = $($(this).first('.section-option').html());
-						line.find('a').each(function() {
-							// Has a child UL
-							$(this).find('ul').each(function() {
-								$(this).find('li').each(function() {
-									var options = $(this).closest('a').data('options') || [];
-									options.push($(this).text());
-									$(this).closest('a').data('options', options);
+						var row = $('<tr><td>' + $(this).data('title') + '</td><td></td></tr>')
+							.appendTo('#editor table');
+						var rowContent = row.find('td:eq(1)');
+						$(this).find('.section-option').each(function() {
+							$(this).find('a').each(function() {
+								// Has a child UL
+								$(this).children('ul').each(function() {
+									$(this).find('li').each(function() {
+										var options = $(this).closest('a').data('options') || [];
+										options.push($(this).text());
+										$(this).closest('a').data('options', options);
+									});
+									$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
 								});
-								$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
+
+								// GIve each a unique ID
+								$(this).attr('id', 'fillin-' + $.options.lastid++);
 							});
 
-							// GIve each a unique ID
-							$(this).attr('id', 'fillin-' + $.options.lastid++);
+							$('<div class="editline"></div>')
+								.appendTo(rowContent)
+								.append(this);
 						});
-
-						$('<tr><td>' + $(this).data('title') + '</td><td><div class="editline"></div></td></tr>')
-							.appendTo('#editor table')
-							.find('.editline').append(line);
 					});
 			},
 			error: function(a, e) {
@@ -73,10 +77,11 @@ $.extend({
 		// Event handlers {{{
 		$('#editor').popover({
 			placement: 'bottom',
-			selector: 'a',
-			title: 'Hello World',
+			selector: '.section-option > a',
+			title: 'Hello World <i class="pull-right icon-remove-sign"></i>',
 			html: true,
 			content: function() {
+				$('#editor .popover').hide();
 				var out = '';
 				var options;
 				if (options = $(this).data('options')) { // Has a pre-defined options list
@@ -92,6 +97,9 @@ $.extend({
 				console.log('OUT', out);
 				return out;
 			}
+		});
+		$('#editor').on('click', '.popover-title', function() {
+			$(this).closest('.popover').hide();
 		});
 		$('#editor .popover radio').click(function() {
 		});
