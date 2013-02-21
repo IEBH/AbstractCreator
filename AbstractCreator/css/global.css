@@ -97,8 +97,8 @@ i.colorbox {
 	cursor: pointer;
 }
 
-#editor .editline > a {
-	text-decoration: underline;
+#editor .section-option > a {
+	border-bottom: 1px dotted green;
 }
 
 #editor .popover-content {
@@ -108,6 +108,10 @@ i.colorbox {
 #editor .popover-content textarea {
 	padding: 0px;
 	width: 100%;
+}
+
+#editor .popover-title {
+	cursor: pointer;
 }
 /* }}} */
 
