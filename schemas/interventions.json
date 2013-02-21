@@ -1,0 +1,65 @@
+{
+	lists: [
+		'patients-disease': {
+			name: 'Patients / Disease'
+		},
+		'interventions': {
+			name: 'Interventions'
+		},
+		'comparsions': {
+			name: 'Comparisons'
+		},
+		'outcome': {
+			name: 'Outcome'
+		},
+		'study-type': {
+			name: 'Study Type'
+		}
+	],
+	checklists: [
+		{
+			title: 'Title',
+			text: '<a data-list="interventions">INTERVENTIONS</a> vs <a data-list="comparisons">COMPARISONS</a> for <a data-list="outcome">OUTCOME</a>: a systematic review of <a data-list="study-type">STUDY-TYPE</a>'
+		},
+		{
+			title: 'Eligibility Criteria',
+			text: 'We included <a data-list="study-type">STUDY-TYPE</a> testing <a data-list="interventions">INTERVENTIONS</a> versus <a data-list="comparisons">COMPARISONS</a> in <a data-list="patients-disease">PATIENTS-DISEASE</a>'
+		},
+		{
+			title: 'Objectives',
+			text: 'to assess the effect on <a data-list="outcome">OUTCOME</a> of <a data-list="interventions">INTERVENTIONS</a> verses <a data-list="comparisons">COMPARISONS</a> in <a data-list="patients-disease">PATIENTS-DISEASE</a>'
+		},
+		{
+			title: 'Information Sources',
+			text: 'We performed a literature search of trials using <a>Medline (January 1966 - December 2001)</a>, we retrieved <a>English - and non English language articles</a> for review. We searched for <a>both published and unpublished trials</a>'
+		}
+		{
+			title: 'Risk of Bias',
+			text: 'Risk of bias was assessed regarding <a>randomisation, allocation concealment, blinding, incomplete outcome data, selective outcome reporting and other biases.</a>'
+		},
+		{
+			title: 'Included Studies',
+			text: 'We included <a>number of trials</a> trials involving <a>number of participants</a> participants. <a>Give detailed description here</a>'
+		}
+		{
+			title: 'Synthesis of results & description of effects',
+			text: '<a data-list="interventions">INTERVENTIONS</a> reduced <a data-list="outcome">OUTCOME</a> <a>(12 studies, 13 participants, risk ratio pr 0.83 bla bla)</a>'
+		},
+		{
+			title: 'Strengths and Limitations',
+			text: ''
+		},
+		{
+			title: 'Interpretation',
+			text: ''
+		},
+		{
+			title: 'Funding',
+			text: ''
+		},
+		{
+			title: 'Registration',
+			text: ''
+		},
+	]
+}
