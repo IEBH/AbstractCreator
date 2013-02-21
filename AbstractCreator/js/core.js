@@ -58,7 +58,7 @@ $.extend({
 									$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
 								});
 
-								// GIve each a unique ID
+								// Give each a unique ID
 								$(this).attr('id', 'fillin-' + $.options.lastid++);
 							});
 
@@ -82,27 +82,29 @@ $.extend({
 			html: true,
 			content: function() {
 				$('#editor .popover').hide();
-				var out = '';
+				var out = '<div class="form form-horizontal" data-parent-a="' + $(this).attr('id') + '">';
 				var options;
 				if (options = $(this).data('options')) { // Has a pre-defined options list
-					out = '<div class="form-horizontal">';
 					$.each(options, function(i, o) {
 						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
 					});
 					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea></textarea></label>';
-					out += '</div>';
 				} else { // No idea - loose text input
 					out = '<textarea></textarea>';
 				}
-				console.log('OUT', out);
+				out += '</div>';
 				return out;
 			}
 		});
-		$('#editor').on('click', '.popover-title', function() {
-			$(this).closest('.popover').hide();
-		});
-		$('#editor .popover radio').click(function() {
-		});
+		$('#editor')
+			.on('click', '.popover-title', function() {
+				$(this).closest('.popover').hide();
+			})
+			.on('click', '.popover-content input[type=radio]', function() {
+				console.log('a', a);
+				var a = $('#' + $(this).closest('div.form').data('parent-a'));
+				a.text($(this).closest('label').text());
+			});
 		// }}}
 		// FIXME: Temporary forced load of hard coded schema name
 		$.go('interventions');
