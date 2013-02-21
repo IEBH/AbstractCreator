@@ -19,15 +19,16 @@
 	checklists: [
 		{
 			title: 'Title',
-			text: '<a data-list="interventions">INTERVENTIONS</a> vs <a data-list="comparisons">COMPARISONS</a> for <a data-list="outcome">OUTCOME</a>: a systematic review of <a data-list="study-type">STUDY-TYPE</a>'
+			text: '<a data-list="interventions">INTERVENTIONS</a> vs <a data-list="comparisons">COMPARISONS</a> for <a data-list="outcome">OUTCOME</a>: a <a data-alt="systematic review|meta-analysis|systematic review and meta-analysis">systematic review</a> of <a data-list="study-type">STUDY-TYPE</a>'
+			text1: '<a data-alt="systematic review|meta-analysis|systematic review and meta-analysis">systematic review</a> of <a>TITLE</a>'
+		},
+		{
+			title: 'Objectives',
+			text: 'To assess the effect on <a data-list="outcome">OUTCOME</a> of <a data-list="interventions">INTERVENTIONS</a> verses <a data-list="comparisons">COMPARISONS</a> in <a data-list="patients-disease">PATIENTS-DISEASE</a>'
 		},
 		{
 			title: 'Eligibility Criteria',
 			text: 'We included <a data-list="study-type">STUDY-TYPE</a> testing <a data-list="interventions">INTERVENTIONS</a> versus <a data-list="comparisons">COMPARISONS</a> in <a data-list="patients-disease">PATIENTS-DISEASE</a>'
-		},
-		{
-			title: 'Objectives',
-			text: 'to assess the effect on <a data-list="outcome">OUTCOME</a> of <a data-list="interventions">INTERVENTIONS</a> verses <a data-list="comparisons">COMPARISONS</a> in <a data-list="patients-disease">PATIENTS-DISEASE</a>'
 		},
 		{
 			title: 'Information Sources',
