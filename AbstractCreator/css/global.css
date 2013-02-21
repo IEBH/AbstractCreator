@@ -88,6 +88,15 @@ i.colorbox {
 .summary a {display:block; font-size:1.2em; line-height:1.4em; text-transform:uppercase; color:#000;}
 .summary .count {display:block; font-size:1.75em; font-weight:bold;}
 /* }}} */
+/* Widget: Editor */
+#editor {
+	text-align: left;
+}
+
+#editor .editline a {
+	cursor: pointer;
+}
+/* }}} */
 
 /* Waveform {{{ */
 .waveform-readonly {

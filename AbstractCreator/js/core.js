@@ -22,29 +22,84 @@ $(function() {
 			.addClass('icon-chevron-down');
 	});
 	// }}}
-	// Setup local links (from box-titles) {{{
-	var headers = $('div.box[data-ref] h4, h4[data-ref]');
-	if (headers.length) {
-		headers.each(function() {
-			var direct = $(this).data('ref-direct'); // If data-ref-direct is set go straight there rather than navigating to the title
-			var link = direct;
-			if (!direct) {
-				var anchor = $(this).closest('div.box').data('ref');
-				$(this).closest('div.box').before('<a name="' + anchor + '"></a>');
-				link = '#' + anchor;
+
+$.extend({
+	options: {
+		url: 'http://local/',
+		lastid: 0
+	},
+
+	go: function(schema) {
+		$.ajax({
+			url: $.options.url + 'schemas/' + schema + '.html',
+			dataType: 'html',
+			success: function(html) {
+				// Clean up {{{
+				$('#sub-sidebar ul').empty();
+				$.options.lastid = 0;
+				// }}}
+				var editor = $('#editor');
+				editor.html('<table class="table table-stripped table-bordered"><tr><th>Section</th><th width="80%">Text</th></tr></table>');
+				$(html)
+					.children('.section').each(function() {
+						$('#sub-sidebar ul').append('<li><a href="#">' + $(this).data('title') + '</a></li>');
+						var line = $($(this).first('.section-option').html());
+						line.find('a').each(function() {
+							// Has a child UL
+							$(this).find('ul').each(function() {
+								$(this).find('li').each(function() {
+									var options = $(this).closest('a').data('options') || [];
+									options.push($(this).text());
+									$(this).closest('a').data('options', options);
+								});
+								$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
+							});
+
+							// GIve each a unique ID
+							$(this).attr('id', 'fillin-' + $.options.lastid++);
+						});
+
+						$('<tr><td>' + $(this).data('title') + '</td><td><div class="editline"></div></td></tr>')
+							.appendTo('#editor table')
+							.find('.editline').append(line);
+					});
+			},
+			error: function(a, e) {
+				$.error('Cannot load scene ' + scene + ' - ' + e);
 			}
-
-			var item = $('<li><a href="' + link + '">' + $(this).html() + '</a></li>')
-				.appendTo('#sub-sidebar ul');
-
-			if (!direct)
-				item.click(function() {
-					var box = $('div.box[data-ref="' + anchor + '"]');
-					if (box.hasClass('closed'))
-						box.find('.box-control a').trigger('click');
-				})
 		});
-	} else 
-		$('#sub-sidebar').remove();
-	// }}}
+	},
+	init: function() {
+		// Event handlers {{{
+		$('#editor').popover({
+			placement: 'bottom',
+			selector: 'a',
+			title: 'Hello World',
+			html: true,
+			content: function() {
+				var out = '';
+				var options;
+				if (options = $(this).data('options')) { // Has a pre-defined options list
+					out = '<div class="form-horizontal">';
+					$.each(options, function(i, o) {
+						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
+					});
+					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea></textarea></label>';
+					out += '</div>';
+				} else { // No idea - loose text input
+					out = '<textarea></textarea>';
+				}
+				console.log('OUT', out);
+				return out;
+			}
+		});
+		$('#editor .popover radio').click(function() {
+		});
+		// }}}
+		// FIXME: Temporary forced load of hard coded schema name
+		$.go('interventions');
+	}
+});
+
+$.init();
 });

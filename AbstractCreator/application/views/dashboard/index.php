@@ -1,3 +1,2 @@
-<div class="pull-center well">
-	Hello World
+<div id="editor" class="pull-center well">
 </div>
