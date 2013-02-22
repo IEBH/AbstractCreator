@@ -1,0 +1,51 @@
+#abstractContent * {
+    float:left;
+}
+#abstractContent span {
+    padding-left: 2px;
+}
+
+#abstractContent p{
+    width:100%;
+    padding:10px 0px 0px 5px;
+}
+
+.container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.lftColumn {
+    border-left: 1px solid #CCCCCC;
+    margin-bottom: -20000px;
+    min-width: 100px;
+    padding-bottom: 20010px;
+    width: 20%;
+}
+
+.rgtColumn {
+    border-left: 1px solid #CCCCCC;
+    margin-bottom: -20000px;
+    padding-bottom: 20010px;
+    width: 80%;
+}
+
+.title {
+    border-top: 1px solid #CCCCCC;
+    padding: 10px 0 0;
+    width: 100%;
+}
+
+.givenText{
+    border:1px solid white;
+    background-color: #ffffff;
+}
+
+.PlaceHolder {
+    border-bottom: 1px dotted red;
+    color: #6F6F6F;
+}
+
+.dataToBeEnteredDirectly {
+    border-bottom: 1px solid red;
+}
