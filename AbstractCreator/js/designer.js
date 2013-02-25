@@ -43,7 +43,7 @@ $.extend({
 				var sidebarid = 0;
 				$(html)
 					.children('.section').each(function() {
-						$('#sidebar').append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++sidebarid +'"><i class="icon-dashboard"></i>' + $(this).data('title') + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>');
+						$('#sidebar').append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++sidebarid +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).data('title') + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>');
 						var sidebar = $('<ul id="sidebar-' + sidebarid + '" class="nav nav-list collapse in"><li class="pull-center"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).data('title') + '</a></li></ul>')
 							.appendTo('#sidebar');
 						var row = $('<tr><td>' + $(this).data('title') + '</td><td></td></tr>')
