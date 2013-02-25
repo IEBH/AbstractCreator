@@ -39,11 +39,17 @@ footer {
 	cursor: pointer;
 }
 
+#editor .section-option a:hover {
+	text-decoration: none;
+	border-bottom: 1px solid green;
+}
+
 #editor .section-option > a {
 	border-bottom: 1px dotted green;
 }
 
-#editor .popover {
+/* Some types should stretch the inline-edit window a bit */
+#editor .popover.type-text, #editor .popover.type-list {
 	min-width: 300px;
 }
 

@@ -47,7 +47,7 @@ $.extend({
 				editor.html('<table class="table table-stripped table-bordered"><tr><th>Section</th><th width="80%">Text</th></tr></table>');
 				$(html)
 					.children('.ref').each(function() { // Process refs
-						var sectionbox = $('<div class="section-box" id="sectionbox-' + $(this).data('ref') + '" data-ref="' + $(this).data('ref') + '"></div>')
+						var sectionbox = $('<div class="section-box" id="sectionbox-' + $(this).data('ref') + '" data-ref="' + $(this).data('ref') + '" data-icon="' + ($(this).data('icon') || 'icon-circle') + '"></div>')
 							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++refno +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).text() + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
 							.appendTo('#sidebar');
 						var sidebar = $('<ul id="sidebar-' + refno + '" class="nav nav-list collapse in"><li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).text() + '</a></li></ul>')
@@ -139,16 +139,20 @@ $.extend({
 					});
 					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
 				} else if ($(this).hasClass('type-ref')) { // Trying to edit a reference
-					out = '<div class="pull-center"><a href="#" data-toggle="modal" class="btn" data-action="edit-section">Edit ' + $('#sectionbox-' + $(this).data('ref') + ' .nav-header').text() + '</a></div>';
+					out = '<div class="pull-center"><a href="#" data-toggle="modal" class="btn" data-action="edit-section"><i class="' + $('#sectionbox-' + $(this).data('ref')).data('icon') + '"></i> ' + $('#sectionbox-' + $(this).data('ref') + ' .nav-header').text() + '</a></div>';
 				} else if ($(this).hasClass('type-text')) { // Loose text input
 					out = '<textarea>' + $(this).text() + '</textarea>';
 				} else {
 					console.warn('Dont know how to deal with this link type');
 				}
 				out += '</div>';
-				setTimeout(function() {
-					// Trigger a select on the text area when we are yielding
-					$.selectlink.next('.popover').find('textarea').select();
+				setTimeout(function() { // When we yield...
+					var popover = $.selectlink.next('.popover');
+					popover.find('textarea').select(); // Trigger a select on the text area
+					popover // Allocate the type class to the popover so we can theme it differently
+						.toggleClass('type-text', $.selectlink.hasClass('type-text'))
+						.toggleClass('type-ref', $.selectlink.hasClass('type-ref'))
+						.toggleClass('type-list', $.selectlink.hasClass('type-list'));
 				}, 0);
 				return out;
 			}
