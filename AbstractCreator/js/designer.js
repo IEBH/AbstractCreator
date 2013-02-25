@@ -43,7 +43,7 @@ $.extend({
 				editor.html('<table class="table table-stripped table-bordered"><tr><th>Section</th><th width="80%">Text</th></tr></table>');
 				$(html)
 					.children('.ref').each(function() { // Process refs
-						var sectionbox = $('<div class="section-box"></div>')
+						var sectionbox = $('<div class="section-box" id="sectionbox-' + $(this).data('ref') + '"></div>')
 							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++refno +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).text() + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
 							.appendTo('#sidebar');
 						var sidebar = $('<ul id="sidebar-' + refno + '" class="nav nav-list collapse in"><li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).text() + '</a></li></ul>')
@@ -104,7 +104,7 @@ $.extend({
 					});
 					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
 				} else if ($(this).hasClass('type-ref')) { // Trying to edit a reference
-					out = '<div class="pull-center"><a href="#edit-section" data-toggle="modal" class="btn">Edit FIXME</a></div>';
+					out = '<div class="pull-center"><a href="#" data-toggle="modal" class="btn" data-action="edit-section">Edit ' + $('#sectionbox-' + $(this).data('ref') + ' .nav-header').text() + '</a></div>';
 				} else if ($(this).hasClass('type-text')) { // Loose text input
 					out = '<textarea>' + $(this).text() + '</textarea>';
 				} else {
@@ -126,6 +126,9 @@ $.extend({
 				console.log('a', a);
 				var a = $('#' + $(this).closest('div.form').data('parent-a'));
 				a.text($(this).closest('label').text());
+			})
+			.on('click', '.popover-content [data-action=edit-section]', function() {
+				$('#sectionbox-' + $.selectlink.data('ref') + ' .nav-header a').trigger('click');
 			});
 		$('#sidebar').on('click', '[data-action=add-section]', function() {
 			$.sectionbox = $(this).closest('.section-box');
