@@ -39,15 +39,18 @@ $.extend({
 				$.options.lastid = 0;
 				// }}}
 				var editor = $('#editor');
+				var refno = 0;
 				editor.html('<table class="table table-stripped table-bordered"><tr><th>Section</th><th width="80%">Text</th></tr></table>');
-				var sidebarid = 0;
 				$(html)
-					.children('.section').each(function() {
+					.children('.ref').each(function() { // Process refs
 						var sectionbox = $('<div class="section-box"></div>')
-							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++sidebarid +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).data('title') + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
+							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++refno +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).text() + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
 							.appendTo('#sidebar');
-						var sidebar = $('<ul id="sidebar-' + sidebarid + '" class="nav nav-list collapse in"><li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).data('title') + '</a></li></ul>')
+						var sidebar = $('<ul id="sidebar-' + refno + '" class="nav nav-list collapse in"><li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).text() + '</a></li></ul>')
 							.appendTo(sectionbox);
+					})
+					.end()
+					.children('.section').each(function() { // Process sections
 						var row = $('<tr><td>' + $(this).data('title') + '</td><td></td></tr>')
 							.appendTo('#editor table');
 						var rowContent = row.find('td:eq(1)');
