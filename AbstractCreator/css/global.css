@@ -62,3 +62,9 @@ footer {
 	cursor: pointer;
 }
 /* }}} */
+/* Widget: Edit-Section {{{ */
+#edit-section input {
+	width: 97%;
+	margin-bottom: 0;
+}
+/* }}} */
