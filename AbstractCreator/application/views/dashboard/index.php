@@ -1,2 +1,2 @@
-<div id="editor" class="pull-center well">
+<div id="editor" class="pull-center">
 </div>
