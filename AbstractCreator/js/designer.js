@@ -29,6 +29,10 @@ $.extend({
 		lastid: 0
 	},
 
+	/**
+	* Load a schema file
+	* @param string schema A file located in schemas/*.html
+	*/
 	go: function(schema) {
 		$.ajax({
 			url: $.options.url + 'schemas/' + schema + '.html',
@@ -88,6 +92,10 @@ $.extend({
 			}
 		});
 	},
+
+	/**
+	* Refresh all a.type-ref links with a list composed of the ref items
+	*/
 	refreshrefs: function() {
 		var reftext = [];
 		$('.section-box').each(function() {
@@ -102,7 +110,6 @@ $.extend({
 			} else
 				reftext[$(this).data('ref')] = text.join(', ');
 		});
-		console.log(reftext);
 		$('#editor a.type-ref').each(function() {
 			if (reftext[$(this).data('ref')]) { // Has content
 				$(this).text(reftext[$(this).data('ref')]);
@@ -111,6 +118,10 @@ $.extend({
 			}
 		});
 	},
+
+	/**
+	* Initalize everything
+	*/
 	init: function() {
 		// Event handlers {{{
 		$('#editor').popover({
