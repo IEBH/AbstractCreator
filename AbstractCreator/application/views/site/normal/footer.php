@@ -1,7 +1,7 @@
-			<? if ($span) { ?>
+		<? if (!isset($span) || $span) { ?>
 			</div>
-			<? } ?>
 		</div>
+		<? } ?>
 	</div>
 	<footer>
 		<hr>

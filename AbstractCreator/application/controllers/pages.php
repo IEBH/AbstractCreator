@@ -6,9 +6,9 @@ class Pages extends CI_Controller {
 		$this->site->footer();
 	}
 
-	function Design() {
+	function Designer() {
 		$this->site->header(SITE_TITLE, array('span' => false));
-		$this->load->view('pages/design');
+		$this->load->view('pages/designer');
 		$this->site->footer();
 	}
 }

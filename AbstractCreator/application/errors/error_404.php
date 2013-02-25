@@ -10,7 +10,6 @@ require('application/views/site/normal/header.php');
 		<div style="text-align: center; margin-top: 50px">
 			<a class="btn btn-large" href="javascript:window.history.back()"><i class="icon-chevron-left"></i> Go back</a>
 			<a class="btn btn-large" href="/"><i class="icon-home"></i> Go to home page</a>
-			<a class="btn btn-large" href="mailto:matt@mfdc.biz"><i class="icon-envelope"></i> Blame Matt</a>
 		</div>
 	</div>
 </div>

@@ -1,3 +1,5 @@
+<script src="/js/designer.js"></script>
+<div class="row-fluid">
 <div class="span3">
 	<div class="sidebar-nav">
 		<div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="icon-dashboard"></i>Dashboard</div>
@@ -36,3 +38,5 @@
 <div class="span9">
 	<? include('application/views/site/messages.php') ?>
 	<div id="editor" class="pull-center"></div>
+</div>
+</div>
