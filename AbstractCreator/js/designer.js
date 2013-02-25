@@ -43,9 +43,11 @@ $.extend({
 				var sidebarid = 0;
 				$(html)
 					.children('.section').each(function() {
-						$('#sidebar').append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++sidebarid +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).data('title') + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>');
-						var sidebar = $('<ul id="sidebar-' + sidebarid + '" class="nav nav-list collapse in"><li class="pull-center"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).data('title') + '</a></li></ul>')
+						var sectionbox = $('<div class="section-box"></div>')
+							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++sidebarid +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).data('title') + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
 							.appendTo('#sidebar');
+						var sidebar = $('<ul id="sidebar-' + sidebarid + '" class="nav nav-list collapse in"><li class="pull-center"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).data('title') + '</a></li></ul>')
+							.appendTo(sectionbox);
 						var row = $('<tr><td>' + $(this).data('title') + '</td><td></td></tr>')
 							.appendTo('#editor table');
 						var rowContent = row.find('td:eq(1)');
@@ -108,6 +110,10 @@ $.extend({
 				var a = $('#' + $(this).closest('div.form').data('parent-a'));
 				a.text($(this).closest('label').text());
 			});
+		$('#sidebar').on('click', '[data-action=add-section]', function() {
+			$('#edit-section .modal-header h3').text('Edit ' + $(this).closest('.section-box').children('.nav-header').text());
+			$('#edit-section').modal('show');
+		});
 		// }}}
 		// FIXME: Temporary forced load of hard coded schema name
 		$.go('interventions');
