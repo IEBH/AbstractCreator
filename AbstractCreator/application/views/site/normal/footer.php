@@ -5,7 +5,7 @@
 	</div>
 	<footer>
 		<hr>
-		<p>&copy; <?=date('Y')?> <a href="http://www.crebp.net.au/">CREBP</a></p>
+		<p>&copy; <?=date('Y')?> <a href="http://www.crebp.net.au/">Centre for Research in Evidence-Based Practice</a></p>
 	</footer>
   </body>
 </html>
