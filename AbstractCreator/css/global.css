@@ -45,7 +45,6 @@ footer {
 
 #editor .popover {
 	min-width: 300px;
-	min-height: 150px;
 }
 
 #editor .popover-content {
@@ -53,7 +52,8 @@ footer {
 }
 
 #editor .popover-content textarea {
-	padding: 0px;
+	padding: 5px;
+	margin-left: -5px;
 	width: 100%;
 	min-height: 100px;
 }
