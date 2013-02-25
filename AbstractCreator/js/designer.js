@@ -43,7 +43,7 @@ $.extend({
 				editor.html('<table class="table table-stripped table-bordered"><tr><th>Section</th><th width="80%">Text</th></tr></table>');
 				$(html)
 					.children('.ref').each(function() { // Process refs
-						var sectionbox = $('<div class="section-box" id="sectionbox-' + $(this).data('ref') + '"></div>')
+						var sectionbox = $('<div class="section-box" id="sectionbox-' + $(this).data('ref') + '" data-ref="' + $(this).data('ref') + '"></div>')
 							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++refno +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).text() + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
 							.appendTo('#sidebar');
 						var sidebar = $('<ul id="sidebar-' + refno + '" class="nav nav-list collapse in"><li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).text() + '</a></li></ul>')
@@ -81,9 +81,33 @@ $.extend({
 								.append(this);
 						});
 					});
+				$.refreshrefs();
 			},
 			error: function(a, e) {
 				$.error('Cannot load scene ' + scene + ' - ' + e);
+			}
+		});
+	},
+	refreshrefs: function() {
+		var reftext = [];
+		$('.section-box').each(function() {
+			var text = [];
+			$(this).find('.nav li').not('.ignore').each(function() {
+				text.push($(this).text());
+			});
+
+			if (text.length > 1) {
+				var lasttext = text.pop();
+				reftext[$(this).data('ref')] = text.join(', ') + ' and ' + lasttext;
+			} else
+				reftext[$(this).data('ref')] = text.join(', ');
+		});
+		console.log(reftext);
+		$('#editor a.type-ref').each(function() {
+			if (reftext[$(this).data('ref')]) { // Has content
+				$(this).text(reftext[$(this).data('ref')]);
+			} else { // Yet to fill in content
+				$(this).text($(this).data('ref').toUpperCase());
 			}
 		});
 	},
@@ -92,7 +116,7 @@ $.extend({
 		$('#editor').popover({
 			placement: 'bottom',
 			selector: '.section-option > a',
-			title: 'Hello World <i class="pull-right icon-remove-sign"></i>',
+			title: 'Edit text <i class="pull-right icon-remove-sign"></i>',
 			html: true,
 			content: function() {
 				$.selectlink = $(this);
@@ -161,6 +185,7 @@ $.extend({
 					list.append('<li><a href="#">' + $(this).val() + '</a></li>');
 			});
 			list.append('<li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $.sectionbox.find('.nav-header').text() + '</a></li>');
+			$.refreshrefs();
 		});
 		// }}}
 		// FIXME: Temporary forced load of hard coded schema name
