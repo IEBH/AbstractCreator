@@ -1,3 +1,6 @@
+			<? if ($span) { ?>
+			</div>
+			<? } ?>
 		</div>
 	</div>
 	<footer>

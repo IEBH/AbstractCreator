@@ -20,12 +20,6 @@ class Site {
 	var $Theme;
 
 	/**
-	* The breadcrumb path to the current page
-	* @type array
-	*/
-	var $_breadcrumb;
-
-	/**
 	* CodeIgniter reference
 	* @type CodeIgniter
 	*/
@@ -40,7 +34,6 @@ class Site {
 	function Site() {
 		$GLOBALS['messages'] = array();
 		$this->Theme = 'normal';
-		$this->_breadcrumb = array();
 		$this->CI =& get_instance();
 	}
 
@@ -55,12 +48,10 @@ class Site {
 	/**
 	* Output a template header
 	*
-	* Optional params inside the $params array:
-	*	$_REQUEST['what'] An hash (where each value is ignored) of values to put in the What box
-	*	$_REQUEST['where'] Same as above, but for the Where box
-	*
 	* @param string $title The title of the page
 	* @param array $params Other parameters to output to the header page
+	* @param string $params['title'] The title of the page
+	* @param bool $params['span'] Whether to enclose the sub-page in a span element
 	*/
 	function Header($title = 'Welcome', $params = array()) {
 		if (isset($_POST['ajax'])) {
@@ -70,24 +61,11 @@ class Site {
 		header("Content-Type: text/html; charset=utf-8");
 
 		$params['title'] = $title;
-		$params['breadcrumb'] = $this->_breadcrumb;
-
-		$params['sitearea'] = null;
-		$params['sitearea'] = in_array($l = current($this->CI->uri->segments), qw('dashboard projects tasks messages calendar')) ? $l : null;
-		if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] == '/')
-			$params['sitearea'] = 'dashboard';
+		$params['span'] = isset($params['span']) ? $params['span'] : true;
 		$this->headerparams = $params;
 
 		$this->CI->load->view('site/' . $this->Theme . '/header', $params);
 		$this->_spewed_headers = TRUE;
-	}
-
-	/**
-	* Set the breadcrumb path of the current page
-	* @param array An associative array where each key is the path to the item, the value is the written english to display
-	*/
-	function Breadcrumb($path) {
-		$this->_breadcrumb = $path;
 	}
 
 	/**
