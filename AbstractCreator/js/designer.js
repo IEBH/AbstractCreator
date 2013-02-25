@@ -46,7 +46,7 @@ $.extend({
 						var sectionbox = $('<div class="section-box"></div>')
 							.append('<div class="nav-header" data-toggle="collapse" data-target="sidebar-' + ++sidebarid +'"><i class="' + ($(this).data('icon') || 'icon-circle') + '"></i>' + $(this).data('title') + '<a class="btn btn-small" data-action="add-section"><i class="icon-plus"></i></span></div>')
 							.appendTo('#sidebar');
-						var sidebar = $('<ul id="sidebar-' + sidebarid + '" class="nav nav-list collapse in"><li class="pull-center"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).data('title') + '</a></li></ul>')
+						var sidebar = $('<ul id="sidebar-' + sidebarid + '" class="nav nav-list collapse in"><li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $(this).data('title') + '</a></li></ul>')
 							.appendTo(sectionbox);
 						var row = $('<tr><td>' + $(this).data('title') + '</td><td></td></tr>')
 							.appendTo('#editor table');
@@ -111,8 +111,36 @@ $.extend({
 				a.text($(this).closest('label').text());
 			});
 		$('#sidebar').on('click', '[data-action=add-section]', function() {
-			$('#edit-section .modal-header h3').text('Edit ' + $(this).closest('.section-box').children('.nav-header').text());
+			$.sectionbox = $(this).closest('.section-box');
+			$('#edit-section .modal-header h3').text('Edit ' + $.sectionbox.children('.nav-header').text());
+			$('#edit-section .modal-body').empty();
+			var list = $('<table class="table table-striped table-bordered"></table>').appendTo('#edit-section .modal-body');
+			var count = 1;
+			$.sectionbox.find('.nav-list li').each(function() {
+				if ($(this).hasClass('ignore')) return;
+				list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value="' + $(this).text() + '"/></td></tr>');
+			});
+			list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value=""/></td></tr>');
 			$('#edit-section').modal('show');
+		});
+		$('#edit-section').on('shown', function() {
+			// Select the LAST input box available when showing the edit pane
+			$(this).find('input:last').select();
+		});
+		$('#edit-section .modal-body').on('keyup', 'input', function() {
+			// Keep adding new rows whenever the last row is not blank
+			var list = $(this).closest('table');
+			if (list.find('tr:last input').val())
+				list.append('<tr><th width="25px">' + (list.find('tr').length+1) + '</th><td><input type="text" value=""/></td></tr>');
+		});
+		$('#edit-section').on('click', '[data-action=save-section]', function() {
+			var list = $.sectionbox.find('.nav-list');
+			list.empty();
+			$('#edit-section .modal-body table tr input').each(function() {
+				if ($(this).val())
+					list.append('<li><a href="#">' + $(this).val() + '</a></li>');
+			});
+			list.append('<li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $.sectionbox.find('.nav-header').text() + '</a></li>');
 		});
 		// }}}
 		// FIXME: Temporary forced load of hard coded schema name

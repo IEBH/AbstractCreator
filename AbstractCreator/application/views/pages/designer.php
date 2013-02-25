@@ -5,23 +5,24 @@
 		<h3>Edit SECTION</h3>
 	</div>
 	<div class="modal-body">
-		<table class="table table-stiped table-bordered">
+		<table class="table table-striped table-bordered">
 			<tr>
 				<th width="25px">1</th>
-				<td>Content</td>
+				<td><input type="text" value="Content"/></td>
 			</tr>
 			<tr>
 				<th>2</th>
-				<td>Content</td>
+				<td><input type="text" value="Content"/></td>
 			</tr>
 			<tr>
 				<th>3</th>
-				<td>Content</td>
+				<td><input type="text" value="Content"/></td>
 			</tr>
 		</table>
 	</div>
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+		<a href="#" class="btn btn-success" data-action="save-section" data-dismiss="modal">Save &amp; close</a>
 	</div>
 </div>
 <div class="row-fluid">
