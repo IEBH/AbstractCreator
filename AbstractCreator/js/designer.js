@@ -66,6 +66,8 @@ $.extend({
 										$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
 									});
 									$(this).addClass('type-list');
+								} else if ($(this).data('ref')) { // Is a reference
+									$(this).addClass('type-ref');
 								} else { // Unknown type - type=text
 									$(this).addClass('type-text');
 								}
@@ -98,6 +100,8 @@ $.extend({
 						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
 					});
 					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
+				} else if ($(this).hasClass('type-ref')) { // Trying to edit a reference
+					out = '<div class="pull-center"><a href="#edit-section" data-toggle="modal" class="btn">Edit FIXME</a></div>';
 				} else if ($(this).hasClass('type-text')) { // Loose text input
 					out = '<textarea>' + $(this).text() + '</textarea>';
 				} else {
