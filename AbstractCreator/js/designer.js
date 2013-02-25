@@ -53,18 +53,22 @@ $.extend({
 						var rowContent = row.find('td:eq(1)');
 						$(this).find('.section-option').each(function() {
 							$(this).find('a').each(function() {
-								// Has a child UL
-								$(this).children('ul').each(function() {
-									$(this).find('li').each(function() {
-										var options = $(this).closest('a').data('options') || [];
-										options.push($(this).text());
-										$(this).closest('a').data('options', options);
-									});
-									$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
-								});
-
 								// Give each a unique ID
 								$(this).attr('id', 'fillin-' + $.options.lastid++);
+
+								if ($(this).children('ul').length) { // Has a child UL - type=list
+									$(this).children('ul').each(function() {
+										$(this).find('li').each(function() {
+											var options = $(this).closest('a').data('options') || [];
+											options.push($(this).text());
+											$(this).closest('a').data('options', options);
+										});
+										$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
+									});
+									$(this).addClass('type-list');
+								} else { // Unknown type - type=text
+									$(this).addClass('type-text');
+								}
 							});
 
 							$('<div class="editline"></div>')
@@ -89,14 +93,15 @@ $.extend({
 				$.selectlink = $(this);
 				$('#editor .popover').hide();
 				var out = '<div class="form form-horizontal" data-parent-a="' + $(this).attr('id') + '">';
-				var options;
-				if (options = $(this).data('options')) { // Has a pre-defined options list
-					$.each(options, function(i, o) {
+				if ($(this).hasClass('type-list')) { // Has a pre-defined options list
+					$.each($(this).data('options'), function(i, o) {
 						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
 					});
 					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
-				} else { // No idea - loose text input
+				} else if ($(this).hasClass('type-text')) { // Loose text input
 					out = '<textarea>' + $(this).text() + '</textarea>';
+				} else {
+					console.warn('Dont know how to deal with this link type');
 				}
 				out += '</div>';
 				setTimeout(function() {
