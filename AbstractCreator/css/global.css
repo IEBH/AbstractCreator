@@ -1,92 +1,25 @@
 /* Style fixes {{{ */
-.nav-stacked li {
-	margin: 0 !important;
+.navbar {
+	font-family: georgia, serif;
+}
+.navbar .brand {
+	text-shadow: none !important;
+}
+.navbar a {
+	text-shadow: none !important;
+}
+.brand .first {
+	font-style: italic;
+	color: #ccc;
+}
+.brand .second {
+	color: #fff;
+	font-weight: bold;
 }
 
-.nav-stacked i {
-	margin-right: 5px;
-	width: 20px !important;
-	display: inline-block !important;
+footer {
+	text-align: center;
 }
-
-.box-control a {
-	display: block;
-}
-
-.box-control i {
-	margin: 0;
-}
-
-.box-title h4 i {
-	margin-right: 10px;
-}
-
-.table td {
-	vertical-align: middle !important;
-}
-
-.table td a {
-	color: #656565;
-}
-
-.table td a:hover {
-	text-decoration: none;
-	color: black;
-}
-
-.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
-	margin-top: 1px;
-}
-
-.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
-	margin-top: 0px;
-}
-
-.input-append i {
-	margin-top: 2px;
-}
-
-.controls input.input-xxlarge {
-	width: 510px;
-}
-
-i.icon-white {
-	color: white;
-}
-
-.form-inline select {
-	padding-top: 3px;
-}
-
-a.badge {
-	color: white !important;
-}
-/* }}} */
-
-/* Widgets {{{ */
-i.colorbox {
-	display: block;
-	width: 16px;
-	height: 16px;
-	border: 1px solid black;
-	margin: 0 auto;
-}
-
-.tags.personas {
-	margin-left: -12px;
-}
-
-.tags.personas li::after {
-	content: none;
-}
-/* }}} */
-/* Widget: Summary pills {{{ */
-.summary {display:table; width:90%; padding:0; margin:auto;}
-.summary ul {margin:0; padding:0; overflow:hidden; display:table-row;}
-.summary li {margin:0; padding:19px; display:table-cell; border-right:1px solid #eee;}
-.summary li:last-child {border:none;}
-.summary a {display:block; font-size:1.2em; line-height:1.4em; text-transform:uppercase; color:#000;}
-.summary .count {display:block; font-size:1.75em; font-weight:bold;}
 /* }}} */
 /* Widget: Editor */
 #editor {
@@ -112,14 +45,5 @@ i.colorbox {
 
 #editor .popover-title {
 	cursor: pointer;
-}
-/* }}} */
-
-/* Waveform {{{ */
-.waveform-readonly {
-	color: #333;
-	font-size: 13px;
-	margin-top: 5px;
-	display: block;
 }
 /* }}} */
