@@ -86,6 +86,7 @@ $.extend({
 			title: 'Hello World <i class="pull-right icon-remove-sign"></i>',
 			html: true,
 			content: function() {
+				$.selectlink = $(this);
 				$('#editor .popover').hide();
 				var out = '<div class="form form-horizontal" data-parent-a="' + $(this).attr('id') + '">';
 				var options;
@@ -93,11 +94,15 @@ $.extend({
 					$.each(options, function(i, o) {
 						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
 					});
-					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea></textarea></label>';
+					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
 				} else { // No idea - loose text input
-					out = '<textarea></textarea>';
+					out = '<textarea>' + $(this).text() + '</textarea>';
 				}
 				out += '</div>';
+				setTimeout(function() {
+					// Trigger a select on the text area when we are yielding
+					$.selectlink.next('.popover').find('textarea').select();
+				}, 0);
 				return out;
 			}
 		});

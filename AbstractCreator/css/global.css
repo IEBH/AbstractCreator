@@ -43,6 +43,11 @@ footer {
 	border-bottom: 1px dotted green;
 }
 
+#editor .popover {
+	min-width: 300px;
+	min-height: 150px;
+}
+
 #editor .popover-content {
 	padding: 6px 10px;
 }
@@ -50,6 +55,7 @@ footer {
 #editor .popover-content textarea {
 	padding: 0px;
 	width: 100%;
+	min-height: 100px;
 }
 
 #editor .popover-title {
