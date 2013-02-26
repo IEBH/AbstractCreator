@@ -2,6 +2,9 @@
 .navbar {
 	font-family: georgia, serif;
 }
+.navbar #fat-menu {
+	display: none;
+}
 .navbar .brand {
 	text-shadow: none !important;
 }
@@ -47,6 +50,14 @@ footer {
 	cursor: pointer;
 }
 
+#editor .editline {
+	display: none;
+}
+
+#editor .editline.active {
+	display: block;
+}
+
 #editor .section-option a:hover {
 	text-decoration: none;
 	border-bottom: 1px solid green;
@@ -76,9 +87,19 @@ footer {
 	cursor: pointer;
 }
 /* }}} */
-/* Widget: Edit-Section {{{ */
+/* Modal: Edit-Section {{{ */
 #edit-section input {
 	width: 97%;
 	margin-bottom: 0;
+}
+/* }}} */
+/* Modal: Clipboard {{{ */
+#clipboard .modal-body {
+	padding: 10px;
+}
+
+#clipboard textarea {
+	width: 95%;
+	min-height: 300px;
 }
 /* }}} */

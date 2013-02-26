@@ -85,6 +85,9 @@ $.extend({
 								.append(this);
 						});
 					});
+				$('#editor tr').each(function() {
+					$(this).find('.editline:first').addClass('active');
+				});
 				$.refreshrefs();
 			},
 			error: function(a, e) {
@@ -123,6 +126,9 @@ $.extend({
 	* Initalize everything
 	*/
 	init: function() {
+		// Setup top menus {{{
+		$('#navbar #fat-menu').show();
+		// }}}
 		// Event handlers {{{
 		$('#editor').popover({
 			placement: 'bottom',
@@ -182,6 +188,8 @@ $.extend({
 			list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value=""/></td></tr>');
 			$('#edit-section').modal('show');
 		});
+		// }}}
+		// Modal: #edit-section {{{
 		$('#edit-section').on('shown', function() {
 			// Select the LAST input box available when showing the edit pane
 			$(this).find('input:last').select();
@@ -201,6 +209,17 @@ $.extend({
 			});
 			list.append('<li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $.sectionbox.find('.nav-header').text() + '</a></li>');
 			$.refreshrefs();
+		});
+		// }}}
+		// Modal: Clipboard {{{
+		$('#clipboard').on('shown', function() {
+			var text = [];
+			$('#editor .editline.active .section-option').each(function() {
+				var line = $(this).clone();
+				line.find('div, ul').remove();
+				text.push($.trim(line.text().replace(/\s+/g, ' ')));
+			});
+			$(this).find('.modal-body textarea').val(text.join("\n"));
 		});
 		// }}}
 		// FIXME: Temporary forced load of hard coded schema name
