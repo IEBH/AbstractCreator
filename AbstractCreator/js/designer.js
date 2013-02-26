@@ -212,6 +212,7 @@ $.extend({
 		});
 		// }}}
 		// Modal: Clipboard {{{
+		$.clipboard = new ZeroClipboard($('#clipboard [data-action=copy-text]'), {moviePath: "/lib/zeroclipboard/ZeroClipboard.swf"});
 		$('#clipboard').on('shown', function() {
 			var text = [];
 			$('#editor .editline.active .section-option').each(function() {

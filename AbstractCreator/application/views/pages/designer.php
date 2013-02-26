@@ -1,3 +1,4 @@
+<script src="/lib/zeroclipboard/ZeroClipboard.min.js"></script>
 <script src="/js/designer.js"></script>
 <div id="edit-section" class="modal hide fade">
 	<div class="modal-header">
@@ -47,7 +48,8 @@
 	</div>
 	<div class="modal-body">
 		<div class="pull-center">
-			<textarea></textarea>
+			<textarea id="clipboard-text"></textarea>
+			<a href="#" data-action="copy-text" data-clipboard-target="clipboard-text" class="btn btn-success"><i class="icon-copy"></i> Copy to clipboard</a>
 		</div>
 	</div>
 	<div class="modal-footer">
