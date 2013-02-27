@@ -23,9 +23,9 @@
 			</div>
 		</div>
 	</div>
+	<? if (!isset($span) || $span) { ?>
 	<div class="container-fluid">
-		<? if (!isset($span) || $span) { ?>
 		<div class="row-fluid">
 			<div class="span12">
 			<? include('application/views/site/messages.php') ?>
-		<? } ?>
+	<? } ?>

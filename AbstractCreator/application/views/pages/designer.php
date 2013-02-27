@@ -1,5 +1,6 @@
 <script src="/lib/zeroclipboard/ZeroClipboard.min.js"></script>
 <script src="/js/designer.js"></script>
+<div class="container-fluid">
 <div id="edit-section" class="modal hide fade">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
@@ -64,5 +65,6 @@
 <div class="span9">
 	<? include('application/views/site/messages.php') ?>
 	<div id="editor" class="pull-center"></div>
+</div>
 </div>
 </div>
