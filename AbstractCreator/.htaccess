@@ -2,42 +2,12 @@ Options -Indexes
 
 # Rewrite fun
 RewriteEngine on
-RewriteBase /
-
-# Ignore rules - defer to a nested .htaccess
-RewriteRule ^blog		- [L]
-
-# Determine the site variable {{{
-# Set default fallback profile
-RewriteRule ^ - [E=site:ipledg]
-
-# Set default site profile based on domain
-RewriteCond %{SERVER_NAME} ipledg\.
-RewriteRule ^ - [E=site:ipledg]
-
-RewriteCond %{SERVER_NAME} ajf\.mfdc\.biz$
-RewriteRule ^ - [E=site:ajf]
-
-# If we are passed ?skin=WHATEVER set the site variable to that
-RewriteCond %{HTTP_COOKIE} (^|[,\s])skin=([^\s,;]+)
-RewriteRule ^ - [E=site:%2]
-# }}}
+RewriteBase /ac
 
 # If the file exists
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(.*)$		- [L]
 
-# If the file exists within a site asset folder
-RewriteCond %{REQUEST_URI} !^(\/application\/views) [OR]
-RewriteCond /application/views/%{ENV:site}/$1 -f
-RewriteRule ^((js|css|img|fonts)/.*)$	/application/views/%{ENV:site}/$1 [L]
-
-RewriteRule ^favicon.png$	/application/views/%{ENV:site}/img/favicon.png [L]
-
-# Uncomment the next line to take the site down for maintenance (except for approved IP lists)
-#RewriteCond %{REMOTE_ADDR} !^127.0.0.1|118.208.62.24|121.223.30.171$
-#RewriteRule ^.*			sitedown.html [L]
-
 # Throw everything else at Codeigniter
 RewriteCond $1 !^(index\.php|images|robots\.txt)
-RewriteRule ^(.*)$ /index.php/$1 [L]
+RewriteRule ^(.*)$ index.php/$1 [L]
