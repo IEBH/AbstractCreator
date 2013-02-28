@@ -147,11 +147,11 @@ $.extend({
 					$.each($(this).data('options'), function(i, o) {
 						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
 					});
-					out += '<label class="radio"><input type="radio" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
+					out += '<label class="radio"><input type="radio" class="usetext" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
 				} else if ($(this).hasClass('type-ref')) { // Trying to edit a reference
-					out = '<div class="pull-center"><a href="#" data-toggle="modal" class="btn" data-action="edit-section"><i class="' + $('#sectionbox-' + $(this).data('ref')).data('icon') + '"></i> ' + $('#sectionbox-' + $(this).data('ref') + ' .nav-header').text() + '</a></div>';
+					out += '<div class="pull-center"><a href="#" data-toggle="modal" class="btn" data-action="edit-section"><i class="' + $('#sectionbox-' + $(this).data('ref')).data('icon') + '"></i> ' + $('#sectionbox-' + $(this).data('ref') + ' .nav-header').text() + '</a></div>';
 				} else if ($(this).hasClass('type-text')) { // Loose text input
-					out = '<textarea>' + $(this).text() + '</textarea>';
+					out += '<textarea>' + $(this).text() + '</textarea>';
 				} else {
 					console.warn('Dont know how to deal with this link type');
 				}
@@ -171,9 +171,16 @@ $.extend({
 			.on('click', '.popover-title', function() {
 				$(this).closest('.popover').hide();
 			})
+			.on('keyup', '.popover-content textarea', function() {
+				var a = $('#' + $(this).closest('div.form').data('parent-a'));
+				a.text($(this).val());
+			})
 			.on('click', '.popover-content input[type=radio]', function() {
 				var a = $('#' + $(this).closest('div.form').data('parent-a'));
-				a.text($(this).closest('label').text());
+				if ($(this).hasClass('usetext')) { // Radio indicates using the textarea
+					a.text($(this).next('textarea').val());
+				} else // Use the radio label text
+					a.text($(this).closest('label').text());
 			})
 			.on('click', '.popover-content [data-action=edit-section]', function() {
 				$('#sectionbox-' + $.selectlink.data('ref') + ' .nav-header a').trigger('click');
