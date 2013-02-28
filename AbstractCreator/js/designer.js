@@ -190,7 +190,8 @@ $.extend({
 		$('#editor').on('click', '.section-header', function() {
 			$.selectheader = $(this);
 			var body = $('#section-style .modal-body .styles').empty();
-			$(this).closest('td').next('td').find('.editline .section-option').each(function() {
+			$(this).closest('tr').find('.editline .section-option').each(function() {
+				console.log(this);
 				body.append('<div class="well">' + $(this).data('title') + '</div>');
 			});
 			$('#section-style').modal('show');
