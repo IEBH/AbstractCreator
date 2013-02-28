@@ -172,7 +172,6 @@ $.extend({
 				$(this).closest('.popover').hide();
 			})
 			.on('click', '.popover-content input[type=radio]', function() {
-				console.log('a', a);
 				var a = $('#' + $(this).closest('div.form').data('parent-a'));
 				a.text($(this).closest('label').text());
 			})
@@ -193,7 +192,6 @@ $.extend({
 			var active = $(this).index();
 			$.selectheader.closest('td').next('td').find('.editline .section-option').each(function(i) {
 				$(this).toggleClass('active',  active == i);
-				console.log(this, active, i);
 			});
 			$('#section-style').modal('hide');
 		});
