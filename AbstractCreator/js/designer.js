@@ -179,19 +179,6 @@ $.extend({
 			.on('click', '.popover-content [data-action=edit-section]', function() {
 				$('#sectionbox-' + $.selectlink.data('ref') + ' .nav-header a').trigger('click');
 			});
-		$('#sidebar').on('click', '[data-action=add-section]', function() {
-			$.sectionbox = $(this).closest('.section-box');
-			$('#edit-section .modal-header h3').text('Edit ' + $.sectionbox.children('.nav-header').text());
-			$('#edit-section .modal-body').empty();
-			var list = $('<table class="table table-striped table-bordered"></table>').appendTo('#edit-section .modal-body');
-			var count = 1;
-			$.sectionbox.find('.nav-list li').each(function() {
-				if ($(this).hasClass('ignore')) return;
-				list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value="' + $(this).text() + '"/></td></tr>');
-			});
-			list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value=""/></td></tr>');
-			$('#edit-section').modal('show');
-		});
 		// }}}
 		// Modal: #section-style {{{
 		$('#editor').on('click', '.section-header', function() {
@@ -212,26 +199,51 @@ $.extend({
 		});
 		// }}}
 		// Modal: #edit-section {{{
-		$('#edit-section').on('shown', function() {
-			// Select the LAST input box available when showing the edit pane
-			$(this).find('input:last').select();
-		});
-		$('#edit-section .modal-body').on('keyup', 'input', function() {
-			// Keep adding new rows whenever the last row is not blank
-			var list = $(this).closest('table');
-			if (list.find('tr:last input').val())
-				list.append('<tr><th width="25px">' + (list.find('tr').length+1) + '</th><td><input type="text" value=""/></td></tr>');
-		});
-		$('#edit-section').on('click', '[data-action=save-section]', function() {
-			var list = $.sectionbox.find('.nav-list');
-			list.empty();
-			$('#edit-section .modal-body table tr input').each(function() {
-				if ($(this).val())
-					list.append('<li><a href="#">' + $(this).val() + '</a></li>');
+		$('#sidebar').on('click', '[data-action=add-section]', function() {
+			$.sectionbox = $(this).closest('.section-box');
+			$('#edit-section .modal-header h3').text('Edit ' + $.sectionbox.children('.nav-header').text());
+			$('#edit-section .modal-body').empty();
+			var list = $('<table class="table table-striped table-bordered"></table>').appendTo('#edit-section .modal-body');
+			var count = 1;
+			$.sectionbox.find('.nav-list li').each(function() {
+				if ($(this).hasClass('ignore')) return;
+				list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value="' + $(this).text() + '"/></td><td width="32px"><a class="btn btn-danger" data-action="section-remove"><i class="icon-trash"></i></a></td></tr>');
 			});
-			list.append('<li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $.sectionbox.find('.nav-header').text() + '</a></li>');
-			$.refreshrefs();
+			list.append('<tr><th width="25px">' + count++ + '</th><td><input type="text" value=""/></td></tr>');
+			$('#edit-section').modal('show');
 		});
+		$('#edit-section')
+			.on('shown', function() {
+				// Select the LAST input box available when showing the edit pane
+				$(this).find('input:last').select();
+			})
+			.on('keyup', '.modal-body input', function() {
+				// Keep adding new rows whenever the last row is not blank
+				var list = $(this).closest('table');
+				if (list.find('tr:last input').val()) {
+					// Append delete button next to the current last row
+					list.find('tr:eq(-1)').append('<td width="32px"><a class="btn btn-danger" data-action="section-remove"><i class="icon-trash"></i></a></td>');
+					// Append a new blank link under this one
+					list.append('<tr><th width="25px">' + (list.find('tr').length+1) + '</th><td><input type="text" value=""/></td></tr>');
+				}
+			})
+			.on('click', '[data-action=section-remove]', function() {
+				var table = $(this).closest('table');
+				$(this).closest('tr').remove();
+				table.find('tr').each(function(i) { // Renumber columns
+					$(this).children('th').first().text(i+1);
+				});
+			})
+			.on('click', '[data-action=save-section]', function() {
+				var list = $.sectionbox.find('.nav-list');
+				list.empty();
+				$('#edit-section .modal-body table tr input').each(function() {
+					if ($(this).val())
+						list.append('<li><a href="#">' + $(this).val() + '</a></li>');
+				});
+				list.append('<li class="pull-center ignore"><a href="#" data-action="add-section" class="muted font-tiny"><i class="icon-plus"></i> Add ' + $.sectionbox.find('.nav-header').text() + '</a></li>');
+				$.refreshrefs();
+			});
 		// }}}
 		// Modal: #clipboard {{{
 		$.clipboards['modal-clipboard'] = new ZeroClipboard($('#clipboard [data-action=copy-text]'), {moviePath: "/lib/zeroclipboard/ZeroClipboard.swf"});
