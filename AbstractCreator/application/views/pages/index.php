@@ -6,6 +6,7 @@
 		<p><a href="/designer" class="btn btn-primary btn-large">Create an Abstract</a></p>
 		<ul class="masthead-links">
 			<li><a href="http://github.com/hash-bang">GitHub project</a></li>
+			<li><a href="#FIXME">Original paper</a></li>
 			<li><a href="/examples">Examples</a></li>
 			<li>Version <?=VERSION?></li>
 		</ul>
