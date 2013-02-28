@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $autoload['packages'] = array();
-$autoload['libraries'] = array('database', 'site');
+$autoload['libraries'] = array('site');
 $autoload['helper'] = array();
 $autoload['config'] = array();
 $autoload['language'] = array();
