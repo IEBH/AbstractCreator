@@ -61,9 +61,9 @@ $.extend({
 					})
 					.end()
 					.children('.section').each(function() { // Process sections
-						var row = $('<tr><td>' + $(this).data('title') + '</td><td></td></tr>')
+						var row = $('<tr><td><a class="section-header">' + $(this).data('title') + ' <span class="caret"></span></a></td><td><div class="editline"></div></td></tr>')
 							.appendTo('#editor table');
-						var rowContent = row.find('td:eq(1)');
+						var rowContent = row.find('.editline');
 						$(this).find('.section-option').each(function() {
 							$(this).find('a').each(function() {
 								// Give each a unique ID
@@ -86,13 +86,11 @@ $.extend({
 								}
 							});
 
-							$('<div class="editline"></div>')
-								.appendTo(rowContent)
-								.append(this);
+							rowContent.append(this);
 						});
 					});
 				$('#editor tr').each(function() {
-					$(this).find('.editline:first').addClass('active');
+					$(this).find('.section-option:first').addClass('active');
 				});
 				$.refreshrefs();
 			},
@@ -195,6 +193,24 @@ $.extend({
 			$('#edit-section').modal('show');
 		});
 		// }}}
+		// Modal: #section-style {{{
+		$('#editor').on('click', '.section-header', function() {
+			$.selectheader = $(this);
+			var body = $('#section-style .modal-body').empty();
+			$(this).closest('td').next('td').find('.editline .section-option').each(function() {
+				body.append('<div class="well">' + $(this).data('title') + '</div>');
+			});
+			$('#section-style').modal('show');
+		});
+		$('#section-style').on('click', '.well', function() {
+			var active = $(this).index();
+			$.selectheader.closest('td').next('td').find('.editline .section-option').each(function(i) {
+				$(this).toggleClass('active',  active == i);
+				console.log(this, active, i);
+			});
+			$('#section-style').modal('hide');
+		});
+		// }}}
 		// Modal: #edit-section {{{
 		$('#edit-section').on('shown', function() {
 			// Select the LAST input box available when showing the edit pane
@@ -217,7 +233,7 @@ $.extend({
 			$.refreshrefs();
 		});
 		// }}}
-		// Modal: Clipboard {{{
+		// Modal: #clipboard {{{
 		$.clipboards['modal-clipboard'] = new ZeroClipboard($('#clipboard [data-action=copy-text]'), {moviePath: "/lib/zeroclipboard/ZeroClipboard.swf"});
 		$('#clipboard').on('shown', function() {
 			var text = [];
@@ -229,7 +245,7 @@ $.extend({
 			$(this).find('.modal-body textarea').val(text.join("\n"));
 		});
 		// }}}
-		// Modal: Save {{{
+		// Modal: #save {{{
 		$('#save').on('shown', function() {
 			$('#save .modal-body').html('<div class="pull-center"><div class="alert alert-info">It would be great if we can save your email in case we need to contact you</div><div><input type="text" id="save-email"/><span class="help-block">Providing your email address is optional</span></div><div class="pad-top"><a class="btn btn-large btn-success" data-action="save"><i class="icon-save"></i> Save</a></div></div>');
 			$('#save #save-email').focus();

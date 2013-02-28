@@ -1,6 +1,21 @@
 <script src="/lib/zeroclipboard/ZeroClipboard.min.js"></script>
 <script src="/js/designer.js"></script>
 <div class="container-fluid">
+<div id="section-style" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>
+		<h3>Section Style</h3>
+	</div>
+	<div class="modal-body">
+		<table class="table">
+			<tr><td>Style 1</td></tr>
+			<tr><td>Style 2</td></tr>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+	</div>
+</div>
 <div id="edit-section" class="modal hide fade">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-circle"></i></button>

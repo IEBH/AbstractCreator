@@ -51,15 +51,34 @@ footer {
 	background: white;
 }
 
+#editor .section-header {
+	color: #333;
+	display: block;
+}
+
+#editor .section-header:hover {
+	color: #005580;
+	text-decoration: none;
+}
+
+#editor .section-header span {
+	vertical-align: middle;
+	display: none;
+}
+
+#editor .section-header:hover span {
+	display: inline-block !important;
+}
+
 #editor a {
 	cursor: pointer;
 }
 
-#editor .editline {
+#editor .editline .section-option {
 	display: none;
 }
 
-#editor .editline.active {
+#editor .editline .section-option.active {
 	display: block;
 }
 
@@ -90,6 +109,17 @@ footer {
 
 #editor .popover-title {
 	cursor: pointer;
+}
+/* }}} */
+/* Modal: Style Editor {{{ */
+#section-style .modal-body .well {
+	cursor: pointer;
+}
+#section-style .modal-body .well:hover {
+	background-color: #FAFAFA;
+}
+#section-style .modal-body a:hover {
+	text-decoration: none;
 }
 /* }}} */
 /* Modal: Edit-Section {{{ */
