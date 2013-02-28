@@ -255,7 +255,8 @@ $.extend({
 		$.clipboards['modal-clipboard'] = new ZeroClipboard($('#clipboard [data-action=copy-text]'), {moviePath: "/lib/zeroclipboard/ZeroClipboard.swf"});
 		$('#clipboard').on('shown', function() {
 			var text = [];
-			$('#editor .editline.active .section-option').each(function() {
+			$('#editor .editline .section-option.active').each(function() {
+				console.log(this);
 				var line = $(this).clone();
 				line.find('div, ul').remove();
 				text.push($.trim(line.text().replace(/\s+/g, ' ')));
