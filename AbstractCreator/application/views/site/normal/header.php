@@ -19,7 +19,7 @@
 						</ul>
 					</li>
 				</ul>
-				<a class="brand" href="/"><span class="first">Abstract</span> <span class="second">Creator</span></a>
+				<a class="brand" href="<?=SITE_ROOT?>"><span class="first">Abstract</span> <span class="second">Creator</span></a>
 			</div>
 		</div>
 	</div>
