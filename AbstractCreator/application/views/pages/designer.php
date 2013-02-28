@@ -7,10 +7,8 @@
 		<h3>Section Style</h3>
 	</div>
 	<div class="modal-body">
-		<table class="table">
-			<tr><td>Style 1</td></tr>
-			<tr><td>Style 2</td></tr>
-		</table>
+		<p class="pull-center pad-bottom">Select the style you want to use for this section</p>
+		<div class="styles"></div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Cancel</a>

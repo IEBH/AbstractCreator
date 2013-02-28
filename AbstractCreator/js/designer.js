@@ -196,7 +196,7 @@ $.extend({
 		// Modal: #section-style {{{
 		$('#editor').on('click', '.section-header', function() {
 			$.selectheader = $(this);
-			var body = $('#section-style .modal-body').empty();
+			var body = $('#section-style .modal-body .styles').empty();
 			$(this).closest('td').next('td').find('.editline .section-option').each(function() {
 				body.append('<div class="well">' + $(this).data('title') + '</div>');
 			});
