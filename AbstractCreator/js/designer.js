@@ -32,6 +32,7 @@ $.extend({
 
 	options: {
 		url: './',
+		urlClipboard: './lib/zeroclipboard/ZeroClipboard.swf',
 		lastid: 0
 	},
 
@@ -252,7 +253,7 @@ $.extend({
 			});
 		// }}}
 		// Modal: #clipboard {{{
-		$.clipboards['modal-clipboard'] = new ZeroClipboard($('#clipboard [data-action=copy-text]'), {moviePath: "/lib/zeroclipboard/ZeroClipboard.swf"});
+		$.clipboards['modal-clipboard'] = new ZeroClipboard($('#clipboard [data-action=copy-text]'), {moviePath: $.options.urlClipboard});
 		$('#clipboard').on('shown', function() {
 			var text = [];
 			$('#editor .editline .section-option.active').each(function() {
@@ -272,8 +273,8 @@ $.extend({
 		.on('click', '[data-action=save]', function() {
 			$('#save .modal-body').html('<div class="pull-center font-huge"><i class="icon-spinner icon-spin"></i> Saving...</div>');
 			setTimeout(function() {
-				$('#save .modal-body').html('<div class="pull-center"><div class="alert alert-info">Open the unique URL below in any browser to continue creating your abstract</div><div><input type="text" id="save-url" value="http://crebp.net.au/ac/h82ldy2"/></div><div><a href="#" data-action="copy-text" data-clipboard-target="save-url" class="btn btn-success"><i class="icon-copy"></i> Copy to clipboard</a></div></div>');
-				$.clipboards['modal-save'] = new ZeroClipboard($('#save [data-action=copy-text]'), {moviePath: "/lib/zeroclipboard/ZeroClipboard.swf"});
+				$('#save .modal-body').html('<div class="pull-center"><div class="alert alert-info">Open the unique URL below in any browser to continue creating your abstract</div><div><input type="text" id="save-url" value="http://crebp.net.au/ac/designer#h82ldy2"/></div><div><a href="#" data-action="copy-text" data-clipboard-target="save-url" class="btn btn-success"><i class="icon-copy"></i> Copy to clipboard</a></div></div>');
+				$.clipboards['modal-save'] = new ZeroClipboard($('#save [data-action=copy-text]'), {moviePath: $.options.urlClipboard});
 			}, 3000);
 		});
 		// }}}
