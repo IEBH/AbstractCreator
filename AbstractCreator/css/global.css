@@ -108,3 +108,11 @@ footer {
 	min-height: 300px;
 }
 /* }}} */
+/* Modal: Save {{{ */
+#save .modal-body input[type=text] {
+	font-size: 20pt;
+	height: auto;
+	padding: 5px;
+	width: 80%;
+}
+/* }}} */

@@ -223,6 +223,18 @@ $.extend({
 			$(this).find('.modal-body textarea').val(text.join("\n"));
 		});
 		// }}}
+		// Modal: Save {{{
+		$('#save').on('shown', function() {
+			$('#save .modal-body').html('<div class="pull-center"><div class="alert alert-info">It would be great if we can save your email in case we need to contact you</div><div><input type="text" id="save-email"/><span class="help-block">Providing your email address is optional</span></div><div class="pad-top"><a class="btn btn-large btn-success" data-action="save"><i class="icon-save"></i> Save</a></div></div>');
+			$('#save #save-email').focus();
+		})
+		.on('click', '[data-action=save]', function() {
+			$('#save .modal-body').html('<div class="pull-center font-huge"><i class="icon-spinner icon-spin"></i> Saving...</div>');
+			setTimeout(function() {
+				$('#save .modal-body').html('<div class="pull-center"><div class="alert alert-info">Open the unique URL below in any browser to continue creating your abstract</div><div><input type="text" value="http://crebp.net.au/ac/h82ldy2"/></div></div>');
+			}, 5000);
+		});
+		// }}}
 		// FIXME: Temporary forced load of hard coded schema name
 		$.go('interventions');
 	}

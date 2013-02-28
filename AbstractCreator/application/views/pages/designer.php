@@ -33,10 +33,6 @@
 		<h3>Save + Share</h3>
 	</div>
 	<div class="modal-body">
-		<div class="pull-center">
-			<div class="alert alert-info">All you need to do to continue editing is open the unique URL below in any browser</div>
-			<i class="icon-spinner icon-spin"></i> Saving...
-		</div>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn btn-success" data-dismiss="modal">Close</a>
