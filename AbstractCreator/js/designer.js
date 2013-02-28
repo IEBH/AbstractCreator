@@ -31,7 +31,7 @@ $.extend({
 	clipboards: {},
 
 	options: {
-		url: 'http://local/',
+		url: './',
 		lastid: 0
 	},
 

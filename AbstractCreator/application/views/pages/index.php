@@ -1,13 +1,13 @@
-<link href="/css/jumbotron.css" rel="stylesheet" type="text/css"/>
+<link href="<?=SITE_ROOT?>css/jumbotron.css" rel="stylesheet" type="text/css"/>
 <div class="jumbotron masthead">
 	<div class="container">
 		<h1>Abstract Creator</h1>
 		<p><a href="http://www.crebp.net.au/">Centre for Research in Evidence-Based Practice</a></p>
-		<p><a href="/designer" class="btn btn-primary btn-large">Create an Abstract</a></p>
+		<p><a href="<?=SITE_ROOT?>designer" class="btn btn-primary btn-large">Create an Abstract</a></p>
 		<ul class="masthead-links">
 			<li><a href="http://github.com/hash-bang">GitHub project</a></li>
 			<li><a href="#FIXME">Original paper</a></li>
-			<li><a href="/examples">Examples</a></li>
+			<li><a href="<?=SITE_ROOT?>examples">Examples</a></li>
 			<li>Version <?=VERSION?></li>
 		</ul>
 	</div>

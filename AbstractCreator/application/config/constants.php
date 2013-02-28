@@ -39,6 +39,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 define('VERSION', '2.0.0');
 
+define('SITE_ROOT', preg_match('/^local/', $_SERVER['SERVER_NAME']) ? '/' : '/ac/');
 define('SITE_TITLE', 'Abstract Creator');
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

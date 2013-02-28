@@ -1,5 +1,5 @@
-<script src="/lib/zeroclipboard/ZeroClipboard.min.js"></script>
-<script src="/js/designer.js"></script>
+<script src="<?=SITE_ROOT?>lib/zeroclipboard/ZeroClipboard.min.js"></script>
+<script src="<?=SITE_ROOT?>js/designer.js"></script>
 <div class="container-fluid">
 <div id="section-style" class="modal hide fade">
 	<div class="modal-header">
