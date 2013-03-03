@@ -1,15 +1,15 @@
-[submodule "AbstractCreator/sparks/waveform/1.0.0"]
-	path = AbstractCreator/sparks/waveform/1.0.0
+[submodule "sparks/waveform/1.0.0"]
+	path = sparks/waveform/1.0.0
 	url = git@github.com:hash-bang/Spark-Waveform.git
-[submodule "AbstractCreator/lib/shoelace"]
-	path = AbstractCreator/lib/shoelace
+[submodule "lib/shoelace"]
+	path = lib/shoelace
 	url = https://github.com/hash-bang/Shoelace.git
-[submodule "AbstractCreator/sparks/pherl/1.0.0"]
-	path = AbstractCreator/sparks/pherl/1.0.0
+[submodule "sparks/pherl/1.0.0"]
+	path = sparks/pherl/1.0.0
 	url = git@github.com:hash-bang/Spark-Pherl.git
-[submodule "AbstractCreator/sparks/urlopts/1.0.0"]
-	path = AbstractCreator/sparks/urlopts/1.0.0
+[submodule "sparks/urlopts/1.0.0"]
+	path = sparks/urlopts/1.0.0
 	url = git@github.com:hash-bang/Spark-URLopts.git
-[submodule "AbstractCreator/lib/zeroclipboard"]
-	path = AbstractCreator/lib/zeroclipboard
+[submodule "lib/zeroclipboard"]
+	path = lib/zeroclipboard
 	url = https://github.com/jonrohan/ZeroClipboard.git
