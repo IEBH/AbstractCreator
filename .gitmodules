@@ -10,6 +10,3 @@
 [submodule "sparks/urlopts/1.0.0"]
 	path = sparks/urlopts/1.0.0
 	url = git@github.com:hash-bang/Spark-URLopts.git
-[submodule "lib/zeroclipboard"]
-	path = lib/zeroclipboard
-	url = https://github.com/jonrohan/ZeroClipboard.git
