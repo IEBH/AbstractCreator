@@ -33,7 +33,8 @@ $.extend({
 	options: {
 		url: './',
 		urlClipboard: './lib/zeroclipboard/ZeroClipboard.swf',
-		lastid: 0
+		lastid: 0,
+		schema: 'interventions' // Default schema to use when none is explicitly specified
 	},
 
 	/**
@@ -279,7 +280,7 @@ $.extend({
 		});
 		// }}}
 		// FIXME: Temporary forced load of hard coded schema name
-		$.go('interventions');
+		$.go($.options.schema);
 	}
 });
 
