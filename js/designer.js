@@ -71,16 +71,34 @@ $.extend({
 								// Give each a unique ID
 								$(this).attr('id', 'fillin-' + $.options.lastid++);
 
-								if ($(this).children('ul').length) { // Has a child UL - type=list
+								if ($(this).children('ul').length) { // Has a child UL
 									$(this).children('ul').each(function() {
-										$(this).find('li').each(function() {
-											var options = $(this).closest('a').data('options') || [];
-											options.push($(this).text());
-											$(this).closest('a').data('options', options);
-										});
-										$(this).closest('a').text($(this).children('li:first').text()); // Clear the UL item and set to first child LI
+										if ($(this).hasClass('compound')) { // Compound multiple choice list - type=compound
+											$(this).find('li').each(function() {
+												if (!$(this).hasClass('value')) { // Not a value item - i.e. the grammer used to combine list items
+													var options = $(this).closest('a').data('options') || [];
+													options.push($(this).html());
+													$(this).closest('a').data('options', options);
+												} else {
+													var combined = $(this).closest('a').data('combined') || {};
+													combined[$(this).data('combination')] = $(this).text();
+													$(this).closest('a').data('combined', combined);
+												}
+											});
+											$(this).closest('a')
+												.text($(this).data('text') || 'Compound questionx')
+												.addClass('type-compound');
+										} else { // Regular multiple choice list - type=list
+											$(this).find('li').each(function() {
+												var options = $(this).closest('a').data('options') || [];
+												options.push($(this).text());
+												$(this).closest('a').data('options', options);
+											});
+											$(this).closest('a')
+												.text($(this).children('li:first').text()) // Clear the UL item and set to first child LI
+												.addClass('type-list');
+										}
 									});
-									$(this).addClass('type-list');
 								} else if ($(this).data('ref')) { // Is a reference
 									$(this).addClass('type-ref');
 								} else { // Unknown type - type=text
@@ -150,12 +168,19 @@ $.extend({
 						out += '<label class="radio"><input type="radio" name="popover-radio"' + (i==0?' checked="checked"':'') + '/>' + o + '</label>';
 					});
 					out += '<label class="radio"><input type="radio" class="usetext" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
+				} else if ($(this).hasClass('type-compound')) { // Has a pre-defined compound options list
+					out += '<label class="radio"><input type="radio" name="popover-radio" checked="checked"/>';
+					$.each($(this).data('options'), function(i, o) {
+						out += '<div class="control-group">' + o + '</div>';
+					});
+					out += '</label>';
+					out += '<label class="radio"><input type="radio" class="usetext" name="popover-radio"/><textarea>' + $(this).text() + '</textarea></label>';
 				} else if ($(this).hasClass('type-ref')) { // Trying to edit a reference
 					out += '<div class="pull-center"><a href="#" data-toggle="modal" class="btn" data-action="edit-section"><i class="' + $('#sectionbox-' + $(this).data('ref')).data('icon') + '"></i> ' + $('#sectionbox-' + $(this).data('ref') + ' .nav-header').text() + '</a></div>';
 				} else if ($(this).hasClass('type-text')) { // Loose text input
 					out += '<textarea>' + $(this).text() + '</textarea>';
 				} else {
-					console.warn('Dont know how to deal with this link type');
+					console.warn('Dont know how to deal with this link type', this);
 				}
 				out += '</div>';
 				setTimeout(function() { // When we yield...
@@ -164,7 +189,8 @@ $.extend({
 					popover // Allocate the type class to the popover so we can theme it differently
 						.toggleClass('type-text', $.selectlink.hasClass('type-text'))
 						.toggleClass('type-ref', $.selectlink.hasClass('type-ref'))
-						.toggleClass('type-list', $.selectlink.hasClass('type-list'));
+						.toggleClass('type-list', $.selectlink.hasClass('type-list'))
+						.toggleClass('type-compound', $.selectlink.hasClass('type-compound'));
 				}, 0);
 				return out;
 			}
@@ -181,7 +207,14 @@ $.extend({
 				var a = $('#' + $(this).closest('div.form').data('parent-a'));
 				if ($(this).hasClass('usetext')) { // Radio indicates using the textarea
 					a.text($(this).next('textarea').val());
-				} else // Use the radio label text
+				} else if ($(this).closest('.popover').hasClass('type-compound')) { // Compound type - compose the text from the compound options
+					var key = [];
+					$(this).closest('label').find('select').each(function() {
+						key.push($(this).val());
+					});
+					var combined = a.data('combined');
+					a.text(combined[key.join('-')] || 'Unknown');
+				} else // Regular radio option - use the radio label text
 					a.text($(this).closest('label').text());
 			})
 			.on('click', '.popover-content [data-action=edit-section]', function() {

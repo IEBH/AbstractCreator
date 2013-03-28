@@ -124,7 +124,32 @@
 	<!-- STRENGTHS AND LIMITATIONS -->
 	<div class="section" data-title="Strengths and Limitations" data-icon="icon-resize-small">
 		<div class="section-option" data-title="<a>text</a>">
-			<a>text</a>
+			<a>
+				<ul class="compound" data-text="Compound Question">
+					<li>
+						Significance <select>
+							<option value="ss">Statistically Significant</option>
+							<option value="nss">Not Statistically Significant</option>
+						</select>
+					</li>
+					<li>
+						Importance <select>
+							<option value="cip">Clinically Important (Positive)</option>
+							<option value="up">Unimportant (Positive)</option>
+							<option value="un">Unimportant (Negative)</option>
+							<option value="cin">Clinically Important (Negative)</option>
+						</select>
+					</li>
+					<li class="value" data-combination="ss-cip">SS-CIP</li>
+					<li class="value" data-combination="ss-up">SS-UP</li>
+					<li class="value" data-combination="ss-un">SS-UN</li>
+					<li class="value" data-combination="ss-cin">SS-CIN</li>
+					<li class="value" data-combination="nss-cip">NSS-CIP</li>
+					<li class="value" data-combination="nss-up">NSS-UP</li>
+					<li class="value" data-combination="nss-un">NSS-UN</li>
+					<li class="value" data-combination="nss-cin">NSS-CIN</li>
+				</ul>
+			</a>
 		</div>
 		<!-- FIXME: More in paper !-->
 	</div>

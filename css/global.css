@@ -92,7 +92,7 @@ footer {
 }
 
 /* Some types should stretch the inline-edit window a bit */
-#editor .popover.type-text, #editor .popover.type-list {
+#editor .popover.type-text, #editor .popover.type-list, #editor .popover.type-compound {
 	min-width: 300px;
 }
 
@@ -105,6 +105,14 @@ footer {
 	margin-left: -5px;
 	width: 100%;
 	min-height: 100px;
+}
+
+#editor .popover-content .form-horizontal .control-group {
+	margin-bottom: 10px;
+}
+
+#editor .popover-content .form-horizontal .control-group select {
+	width: 100%;
 }
 
 #editor .popover-title {
