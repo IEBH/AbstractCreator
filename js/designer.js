@@ -86,7 +86,7 @@ $.extend({
 												}
 											});
 											$(this).closest('a')
-												.text($(this).data('text') || 'Compound questionx')
+												.text($(this).data('text') || 'Compound question')
 												.addClass('type-compound');
 										} else { // Regular multiple choice list - type=list
 											$(this).find('li').each(function() {
