@@ -5,10 +5,11 @@ Standardised creation tool for medical paper abstracts.
 
 TODO
 ====
-* Add question/answer combo box format with sentence for each (i.e. for the below 4^4 sentences = 16)
-	* Dichotomous / Contiguous (also: time-to-event / rate outcome)
-	* Clinically important / Unimportant
-	* Posative / Negative
-	* Statistically significant / Not statistically significant
+* Change Risk-of-Bias into multiple choice checkboxes
+	- With default answer if none selected ('risk of bias was not assessed')
 * Add null answer (i.e. hide verb)
-	* Hetrogeneity - Low, High, None (hide)
+* Wizard interface
+* Dirty checking i.e. a verb is present but hasn't been altered by the user yet
+	- Prompt when saving / exporting about dirty verbs
+* Add ability to save to server (via JSON?)
+* Print style sheet
